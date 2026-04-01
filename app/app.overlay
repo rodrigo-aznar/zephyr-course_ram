@@ -1,0 +1,15 @@
+/ {
+    aliases {
+        led0 = &my_led;
+    };
+
+    leds {
+        compatible = "gpio-leds";
+        my_led: led_0 {
+            /* Use &gpio0, then the pin number (17), then the flag */
+            gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+            label = "User LED";
+        };
+
+    };
+};
