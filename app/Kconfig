@@ -1,0 +1,9 @@
+config BLINK_SLEEP_TIME_MS
+    int "Led sleep time prompt"
+    default 1000
+    range 100 5000
+    help 
+        set the blink sleep time (ms) between 100 and 5000 
+        (1000 is the default)
+
+source "Kconfig.zephyr"
