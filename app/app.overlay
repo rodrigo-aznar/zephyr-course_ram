@@ -1,6 +1,6 @@
 / {
     aliases {
-        led0 = &my_led;
+        app-led = &my_led;
     };
 
     leds {
