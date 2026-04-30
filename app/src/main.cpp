@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
@@ -22,6 +24,8 @@ int main(void)
 
         led_state = !led_state;
         LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
+
+        printf("Hello World! %s\n", CONFIG_BOARD_TARGET);
 
         k_msleep(CONFIG_APP_HEART_BEAT_PERIOD_MS);
     }
