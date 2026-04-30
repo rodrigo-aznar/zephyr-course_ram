@@ -1,0 +1,6 @@
+board:
+  name: esp32_3248S035C
+  full_name: ESP32-3248S035C from scratch
+  vendor: DIYmalls
+  socs:
+  - name: esp32

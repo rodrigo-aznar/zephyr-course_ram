@@ -1,0 +1,35 @@
+/dts-v1/;
+
+#include <espressif/esp32/esp32_wrover_e_n4r8.dtsi>
+#include "esp32_3248S035C-pinctrl.dtsi"
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <espressif/partitions_0x1000_amp.dtsi>
+
+/ {
+	model = "Cheap Yellow Display ESP32-3248S035C PROCPU";
+	compatible = "espressif,esp32";
+
+	aliases {
+		uart-0 = &uart0;
+	};
+
+
+	chosen {
+		zephyr,sram = &sram1;
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &slot0_partition;
+	};
+};
+
+&uart0 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-names = "default";
+};
+
+&gpio0 {
+	status = "okay";
+};
