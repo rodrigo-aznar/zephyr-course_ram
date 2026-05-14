@@ -1,0 +1,5 @@
+config MY_DRIVER
+    bool "Custom Driver ENABLE"
+    default y
+    help
+        enable/disable the custom driver

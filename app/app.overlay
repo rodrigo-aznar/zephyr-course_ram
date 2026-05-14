@@ -12,4 +12,9 @@
         };
 
     };
+
+    my_driver0: my_driver {
+        compatible = "my,driver";
+        status = "okay";
+    };
 };
