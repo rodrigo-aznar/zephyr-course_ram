@@ -10,3 +10,11 @@ properties:
     type: phandle-array
     required: true
     description: GPIO spec for LED controlling
+  default-sleep-ms:
+    type: int
+    required: true
+    description: Default duration for k_msleep (in ms) to return from calls to turn On/Off in the driver    
+  sleep-ms:
+    type: int
+    required: true
+    description: Duration for k_msleep (in ms) to return from calls to turn On/Off in the driver    

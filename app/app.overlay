@@ -16,6 +16,8 @@
     my_driver0: my_driver {
         compatible = "ram,driver";
         gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+        default-sleep-ms = <200>;
+        sleep-ms = <200>;
         status = "okay";
     };
 };
