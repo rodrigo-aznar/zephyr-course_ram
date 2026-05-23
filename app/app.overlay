@@ -14,7 +14,8 @@
     };
 
     my_driver0: my_driver {
-        compatible = "my,driver";
+        compatible = "ram,driver";
+        gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
         status = "okay";
     };
 };

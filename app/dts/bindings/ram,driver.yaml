@@ -1,0 +1,12 @@
+description: custom driver for lesson 6 homework
+compatible: "ram,driver"
+include: base.yaml
+properties:
+  calibration:
+    type: int
+    required: false
+    description: Calibration value for the sensor
+  gpios:
+    type: phandle-array
+    required: true
+    description: GPIO spec for LED controlling
