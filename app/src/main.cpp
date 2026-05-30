@@ -11,7 +11,21 @@
 /* The devicetree node identifier for the "led0" alias. */
 #define LED_NODE DT_ALIAS(app_led)
 
-#define LECTURE_NR 6
+/* Lecture 7 - Home task 1 - no circular LED blinking - 
+   LEDs are controlled only by shell subcmds:
+
+    uart:~$ sensor read my_driver
+    SUB CMD read / channel_get (Turn LED OFF)
+
+    uart:~$ sensor fetch my_driver
+    SUB CMD fetch / sample_fetch (Turn LED ON)
+
+    uart:~$ sensor info my_driver
+    SUB CMD info (prints device name directly from hardware device tree)
+    Successfully found device: my_driver
+
+*/
+#define LECTURE_NR 71 /* Lecture 7 - Home task 1 */
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
@@ -32,8 +46,10 @@ int main(void)
     uint32_t default_sleep_ms = my_get_sleep_ms(mydev);
 
     bool led_state = true;
+    #if (LECTURE_NR == 6)
     uint32_t sequential_max = 5; // max number of changes we allow sleep to change (always by double)
     uint32_t sleep_iteration_change = 0;
+    #endif
     uint32_t current_sleep_ms = 0;
 
     #if (LECTURE_NR < 6) // lessons previous to custom driver
@@ -52,7 +68,7 @@ int main(void)
 
         led_state = !led_state;
 
-        #if (LECTURE_NR >= 6)
+        #if (LECTURE_NR == 6)
 
         if (led_state)
             (void)sensor_sample_fetch(mydev);
@@ -61,11 +77,14 @@ int main(void)
 
         #endif
 
+        #if (LECTURE_NR <= 6)
         LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
+        #endif
 
         current_sleep_ms = my_get_sleep_ms(mydev);
         k_msleep(current_sleep_ms);
 
+        #if (LECTURE_NR == 6)
         // double the sleep_ms each time until sequential_max is reached
         if (++sleep_iteration_change <= sequential_max)
         {
@@ -78,6 +97,7 @@ int main(void)
             my_set_sleep_ms(mydev, default_sleep_ms);
             LOG_INF("  Reset to default sleep value: ", my_get_sleep_ms(mydev));
         }
+        #endif
 
     }
     return 0;
