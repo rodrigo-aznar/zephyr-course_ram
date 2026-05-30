@@ -11,21 +11,25 @@
 /* The devicetree node identifier for the "led0" alias. */
 #define LED_NODE DT_ALIAS(app_led)
 
-/* Lecture 7 - Home task 1 - no circular LED blinking - 
-   LEDs are controlled only by shell subcmds:
+/* Lecture 7 - Home task 2 - WITH circular LED blinking - 
+   LED blinking sleep interval can be set by subcmd 'set':
 
-    uart:~$ sensor read my_driver
-    SUB CMD read / channel_get (Turn LED OFF)
+    uart:~$ sensor set my_driver 20
+    SUB CMD set <device name> <sleep value in ms>
+    Value 20 is out of range! Expected bounds: [50 to 2500] ms
 
-    uart:~$ sensor fetch my_driver
-    SUB CMD fetch / sample_fetch (Turn LED ON)
+    uart:~$ sensor set my_driver 500
+    SUB CMD set <device name> <sleep value in ms>
+    Sleep interval successfully updated to 500 ms
+    [00:02:39.191,000] <inf> sensor_ram_driver:  sleep_ms updated to 500 
 
-    uart:~$ sensor info my_driver
-    SUB CMD info (prints device name directly from hardware device tree)
-    Successfully found device: my_driver
+    uart:~$ sensor set my_driver 2500
+    SUB CMD set <device name> <sleep value in ms>
+    Sleep interval successfully updated to 2500 ms
+    [00:02:46.331,000] <inf> sensor_ram_driver:  sleep_ms updated to 2500 
 
 */
-#define LECTURE_NR 71 /* Lecture 7 - Home task 1 */
+#define LECTURE_NR 72 /* Lecture 7 - Home task 2 */
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
@@ -46,7 +50,7 @@ int main(void)
     uint32_t default_sleep_ms = my_get_sleep_ms(mydev);
 
     bool led_state = true;
-    #if (LECTURE_NR == 6)
+    #if ((LECTURE_NR == 6) || (LECTURE_NR == 72))
     uint32_t sequential_max = 5; // max number of changes we allow sleep to change (always by double)
     uint32_t sleep_iteration_change = 0;
     #endif
@@ -68,7 +72,7 @@ int main(void)
 
         led_state = !led_state;
 
-        #if (LECTURE_NR == 6)
+        #if ((LECTURE_NR == 6) || (LECTURE_NR == 72))
 
         if (led_state)
             (void)sensor_sample_fetch(mydev);

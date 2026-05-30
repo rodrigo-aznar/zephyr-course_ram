@@ -27,11 +27,12 @@ uint32_t my_get_sleep_ms(const struct device *dev) {
 void my_set_sleep_ms(const struct device *dev, uint32_t sleep_ms_to_set) {
     struct my_driver_data *data = dev->data;
     data->sleep_ms = sleep_ms_to_set;
+    LOG_INF(" sleep_ms updated to %d \n", data->sleep_ms);
 }
 
 static int my_sample_fetch(const struct device *dev, enum sensor_channel chan) {
     const struct my_driver_config *cfg = dev->config;
-    LOG_INF(" Turn LED ON *** \n");
+    // LOG_INF(" Turn LED ON *** \n");
     gpio_pin_set_dt(&cfg->led, 1);
     return 0;
 }
@@ -39,7 +40,7 @@ static int my_sample_fetch(const struct device *dev, enum sensor_channel chan) {
 
 static int my_get_channel(const struct device *dev, enum sensor_channel chan, struct sensor_value *val) {
     const struct my_driver_config *cfg = dev->config;
-    LOG_INF(" Turn LED OFF --- \n");
+    // LOG_INF(" Turn LED OFF --- \n");
     gpio_pin_set_dt(&cfg->led, 0);
     return 0;
 }
