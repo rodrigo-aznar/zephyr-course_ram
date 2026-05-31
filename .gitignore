@@ -1,6 +1,9 @@
 # Build
 build
 
+twister-out/
+twister-out.*/
+
 # West files
 .west
 deps
