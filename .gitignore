@@ -1,7 +1,6 @@
 # Build
 build
 
-twister-out/
 twister-out.*/
 
 # West files
